@@ -9,13 +9,41 @@ export default new Vuex.Store({
     count: 0,
     todos:[
       {id:1,title:"todos item 1",completed:false},
-      {id:1,title:"todos item 1",completed:false},
-      {id:1,title:"todos item 1",completed:false}
+      {id:2,title:"todos item 2",completed:true},
+      {id:3,title:"todos item 3",completed:true}
 
     ]
   },
   getters:{
+    count: state => ++state.count,
+    // 等同于
+    // count(state){
+    //   return ++state.count
+    // }
+    completedTodos: state => state.todos.filter(todo =>todo.completed),
+    
+    // 等同于
+    // completedTodos: function(state){
+    //   return state.todos.filter(function(todo){
+    //     return todo.completed;
+    //   })
+    // }
 
+    completedTodosCount: (state,getters) => getters.completedTodos.length,
+    // 等同于
+    // completedTodosCount: function(state,getters){
+    //   return getters.completedTodos.length
+    // }
+
+    getTodosById: state => id => state.todos.find(todo => todo.id == id)
+    // getTodosById: function(state){
+    //   //处理东西
+    //   function(id){
+    //     return state.todos.find(function(todo){
+    //       return todo.id == id
+    //     })(id)
+    //   }
+    // }
   },
   mutations: {
 
